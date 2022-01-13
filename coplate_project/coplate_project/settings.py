@@ -130,6 +130,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Auth settings
 AUTH_USER_MODEL = "coplate.User"
 
 AUTHENTICATION_BACKENDS = [
@@ -142,6 +143,11 @@ AUTHENTICATION_BACKENDS = [
     
 ]
 
+ACCOUNT_SIGNUP_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'index'
+ACCOUNT_LOGOUT_ON_GET = True
+
+# Email settings
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 SITE_ID = 1
