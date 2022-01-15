@@ -144,6 +144,11 @@ ACCOUNT_SESSION_REMEMBER = True
 SESSION_COOKIE_AGE = 3600
 ACCOUNT_SIGNUP_FORM_CLASS = "coplate.forms.SignupForm"
 ACCOUNT_PASSWORD_INPUT_RENDER_VALUE = True
+ACCOUNT_CONFIRM_EMAIL_ON_GET = True
+
+ACCOUNT_EMAIL_CONFIRMATION_AUTHENTICATION_REDIRECT_URL = "account_email_confirmation_done"
+ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = "account_email_confirmation_done"
+
 # Email settings
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
