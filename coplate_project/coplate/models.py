@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from .validators import validate_no_special_characters
+from .validators import validate_no_special_characters, validate_restaurant_link
 class User(AbstractUser):
     nickname = models.CharField(max_length = 15, unique=True, null=True,
         error_messages = {"unique":"이미 사용중인 닉네임입니다."},
@@ -25,12 +25,14 @@ class Review(models.Model):
 
     rating = models.IntegerField(choices=RATING_CHOICES)
 
-    image1 = models.ImageField()
-    image2 = models.ImageField()
-    image3 = models.ImageField()
+    image1 = models.ImageField(upload_to="review_pics")
+    image2 = models.ImageField(upload_to="review_pics", blank=True)
+    image3 = models.ImageField(upload_to="review_pics", blank=True)
     content = models.TextField()
     dt_created = models.DateTimeField(auto_now_add=True)
     dt_updated = models.DateTimeField(auto_now=True)
     
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+
     def __str__(self):
         return self.title
