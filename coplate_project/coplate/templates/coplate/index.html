@@ -17,7 +17,7 @@
 
       <div class="contents">
         {% for review in reviews %}
-          <a href="#">
+          <a href="{% url 'review-detail' review.id %}">
             <section class="cp-card content">
               <div class="thumb" style="background-image: url('{{ review.image1.url }}');"></div>
               <div class="body">
