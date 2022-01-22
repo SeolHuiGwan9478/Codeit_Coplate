@@ -7,6 +7,9 @@ class User(AbstractUser):
         validators=[validate_no_special_characters],
     )
 
+    profile_pic = models.ImageField(upload_to="profile_pics", default="default_profile_pic.jpg")
+    intro = models.CharField(max_length=60, blank=True)
+
     def __str__(self):
         return self.email
 # Create your models here.
