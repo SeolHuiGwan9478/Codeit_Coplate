@@ -3,7 +3,7 @@ from django.urls import reverse
 from allauth.account.views import PasswordChangeView
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from coplate.forms import ReviewForm
-from coplate.models import Review
+from coplate.models import Review, User
 from braces.views import LoginRequiredMixin, UserPassesTestMixin
 from allauth.account.models import EmailAddress
 from coplate.functions import confirmation_required_redirect
@@ -67,3 +67,15 @@ class ReviewDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class CustomPasswordChangeView(PasswordChangeView):
     def get_success_url(self):
         return reverse("index")
+
+class ProfileView(DetailView):
+    model = User
+    template_name = "coplate/profile.html"
+    pk_url_kwarg = "user_id"
+    context_object_name = "profile_user"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_id = self.kwargs.get("user_id")
+        context["user_reviews"] = Review.objects.filter(author__id=user_id).order_by("-dt_created")[:4]
+        return context
