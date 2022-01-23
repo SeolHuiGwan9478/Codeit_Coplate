@@ -64,9 +64,9 @@ class ReviewDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         review = self.get_object()
         return review.author == user
 
-class CustomPasswordChangeView(PasswordChangeView):
+class CustomPasswordChangeView(LoginRequiredMixin, PasswordChangeView):
     def get_success_url(self):
-        return reverse("index")
+        return reverse("profile", kwargs={"user_id": self.request.user.id})
 
 class ProfileView(DetailView):
     model = User
@@ -105,3 +105,14 @@ class ProfileSetView(LoginRequiredMixin, UpdateView):
     
     def get_success_url(self):
         return reverse("index")
+
+class ProfileUpdateView(UpdateView):
+    model = User
+    form_class = ProfileForm
+    template_name = "coplate/profile_set_form.html"
+
+    def get_object(self, queryset=None):
+        return self.request.user
+    
+    def get_success_url(self):
+        return reverse("profile", kwargs=({"user_id":self.request.user.id}))
