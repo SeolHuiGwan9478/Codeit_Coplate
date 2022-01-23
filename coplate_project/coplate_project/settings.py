@@ -56,6 +56,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'coplate.middleware.ProfileSetupMiddleware',
 ]
 
 ROOT_URLCONF = 'coplate_project.urls'
@@ -137,7 +138,7 @@ AUTHENTICATION_BACKENDS = [
     
 ]
 
-ACCOUNT_SIGNUP_REDIRECT_URL = 'index'
+ACCOUNT_SIGNUP_REDIRECT_URL = 'profile-set'
 LOGIN_REDIRECT_URL = 'index'
 LOGIN_URL = "account_login"
 ACCOUNT_LOGOUT_ON_GET = True
@@ -146,7 +147,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_SESSION_REMEMBER = True
 SESSION_COOKIE_AGE = 3600
-ACCOUNT_SIGNUP_FORM_CLASS = "coplate.forms.SignupForm"
+#ACCOUNT_SIGNUP_FORM_CLASS = "coplate.forms.SignupForm"
 ACCOUNT_PASSWORD_INPUT_RENDER_VALUE = True
 ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 
